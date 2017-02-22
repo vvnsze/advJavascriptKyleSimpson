@@ -6,7 +6,7 @@
 
 	function E(f) {
 		console.log("E");
-		f();
+		F();
 		var f = F;
 	}
 
@@ -19,12 +19,13 @@
 
 	function G() {
 		console.log("G");
-		H();
 
 		var H = function() {
 			console.log("H");
 			I();
 		};
+
+		H();
 	}
 
 	var D = d;
@@ -56,7 +57,8 @@
 			window[rest[i]] = function() {
 				console.log(rest[i]);
 				if (i < (rest.length-1)) {
-					// TODO: call the next function
+					//TODO: call the next function
+					window[rest[i+1]]();
 				}
 			};
 		})(i);
@@ -67,6 +69,7 @@
 			console.log("J");
 			K();
 		};
+		J();
 	};
 
 	C = function() {
