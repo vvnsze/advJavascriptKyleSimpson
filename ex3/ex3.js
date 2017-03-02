@@ -1,35 +1,37 @@
-var NotesManager = (function(){
+var NotesManager = function app (){
+  //..to be continued
+}
 
-	function addNote(note) {
-		$notes.prepend(
-			$("<a href='#'></a>")
-			.addClass("note")
-			.text(note)
-		);
-	}
+NotesManager.prototype.addNote = function(note){
+  this.$notes.prepend(
+    $("<a href='#'></a>")
+    .addClass("note")
+    .text(note)
+  );
+}
 
-	function addCurrentNote() {
-		var current_note = $new_note.val();
+NotesManager.prototype.addCurrentNote = function(){
+  var current_note = this.$new_note.val();
 
-		if (current_note) {
-			notes.push(current_note);
-			addNote(current_note);
-			$new_note.val("");
-		}
-	}
+  if (current_note) {
+    this.notes.push(current_note);
+    this.addNote(current_note);
+    this.$new_note.val("");
+  }
+}
 
-	function showHelp() {
-		$help.show();
+NotesManager.prototype.showHelp = function(){
+  this.$help.show();
+  document.addEventListener("click",function __handler__(evt){
+    evt.preventDefault();
+    evt.stopPropagation();
+    evt.stopImmediatePropagation();
 
-		document.addEventListener("click",function __handler__(evt){
-			evt.preventDefault();
-			evt.stopPropagation();
-			evt.stopImmediatePropagation();
+    document.removeEventListener("click",__handler__,true);
+    hideHelp();
+  },true);
+}
 
-			document.removeEventListener("click",__handler__,true);
-			hideHelp();
-		},true);
-	}
 
 	function hideHelp() {
 		$help.hide();
@@ -125,7 +127,7 @@ var NotesManager = (function(){
 	;
 
 	return publicAPI;
-})();
+
 
 
 // assume this data came from the database
